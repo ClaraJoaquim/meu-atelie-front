@@ -11,4 +11,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent {
 
+  email: string = '';
+  senha: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  fazerLogin() {
+    this.authService.login(this.email, this.senha)
+      .subscribe({
+        next: () => {
+          console.log('Login ok');
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Email ou senha inválidos');
+        }
+      });
+  }
+
 }
