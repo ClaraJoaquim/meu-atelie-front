@@ -1,0 +1,287 @@
+<app-header></app-header>
+
+<main class="main">
+    <div class="container">
+
+      <!-- Cabecalho da pagina -->
+      <section class="page-header">
+        <div class="page-header-text">
+          <a href="produtos.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Voltar para Produtos
+          </a>
+          <h2 class="page-title">Novo Produto</h2>
+          <p class="page-subtitle">Cadastre um novo produto para venda no seu atelie.</p>
+        </div>
+      </section>
+
+      <!-- FORMULARIO -->
+      <form class="form-card" action="#" method="post" enctype="multipart/form-data">
+
+        <!-- Secao: Identificacao do Produto -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Identificacao do Produto
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label for="nome-produto" class="form-label">Nome do Produto *</label>
+              <input type="text" id="nome-produto" name="nome-produto" class="form-input" placeholder="Ex: Toalha de mesa bordada floral" required>
+            </div>
+
+            <div class="form-group form-group--full">
+              <label for="descricao" class="form-label">Descricao do Produto *</label>
+              <textarea id="descricao" name="descricao" class="form-textarea" rows="4" placeholder="Descreva o produto em detalhes: tamanho, tecnica utilizada, acabamento, cores predominantes..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria-produto" class="form-label">Categoria *</label>
+              <select id="categoria-produto" name="categoria-produto" class="form-select" required>
+                <option value="" disabled selected>Selecione a categoria</option>
+                <option value="bordados">Bordados</option>
+                <option value="croche">Croche</option>
+                <option value="trico">Trico</option>
+                <option value="costura">Costura</option>
+                <option value="macrame">Macrame</option>
+                <option value="patchwork">Patchwork</option>
+                <option value="pintura-tecido">Pintura em Tecido</option>
+                <option value="acessorios">Acessorios</option>
+                <option value="decoracao">Decoracao</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="codigo-produto" class="form-label">Codigo / SKU</label>
+              <input type="text" id="codigo-produto" name="codigo-produto" class="form-input" placeholder="Ex: PROD-001, BRD-FLORAL-01">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Imagem do Produto -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Imagem do Produto
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label class="form-label">Foto Principal</label>
+              <div class="image-upload-area" id="upload-area">
+                <input type="file" id="imagem-produto" name="imagem-produto" accept="image/*">
+                <svg class="image-upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="48" height="48"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span class="image-upload-text">Clique ou arraste uma imagem aqui</span>
+                <span class="image-upload-hint">Formatos aceitos: JPG, PNG, WEBP (max. 5MB)</span>
+              </div>
+              <div class="image-preview" id="image-preview">
+                <img id="preview-img" src="" alt="Preview do produto">
+                <div class="image-preview-actions">
+                  <button type="button" class="btn-remove-image" id="btn-remove-image">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                    Remover imagem
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Materiais Utilizados -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Materiais Utilizados
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label class="form-label">Selecione os materiais que compoem este produto</label>
+              <div class="materiais-selector">
+                <div class="materiais-chips">
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="linhas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    Linhas
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="tecidos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                    Tecidos
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="aviamentos">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m-7-10h6m6 0h6"/></svg>
+                    Aviamentos
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="agulhas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><line x1="12" y1="2" x2="12" y2="22"/></svg>
+                    Agulhas
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="fitas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                    Fitas e Rendas
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="entretelas">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="12" x2="22" y2="12"/></svg>
+                    Entretelas
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="bastidores">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="10"/></svg>
+                    Bastidores
+                  </label>
+                  <label class="material-chip">
+                    <input type="checkbox" name="materiais[]" value="outros">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                    Outros
+                  </label>
+                </div>
+                <span class="materiais-hint">Os materiais acima correspondem as categorias cadastradas na pagina de Materiais.</span>
+              </div>
+            </div>
+
+            <div class="form-group form-group--full">
+              <label for="detalhes-materiais" class="form-label">Detalhes dos Materiais</label>
+              <textarea id="detalhes-materiais" name="detalhes-materiais" class="form-textarea" rows="3" placeholder="Especifique quais materiais foram usados, quantidades e cores. Ex: 2 meadas de linha mouline azul DMC-796, 1 metro de tecido etamine branco..."></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Preco e Disponibilidade -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Preco e Disponibilidade
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="preco" class="form-label">Preco de Venda *</label>
+              <div class="price-input-wrapper">
+                <span class="price-prefix">R$</span>
+                <input type="text" id="preco" name="preco" class="form-input" placeholder="0,00" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="preco-custo" class="form-label">Custo de Producao (R$)</label>
+              <div class="price-input-wrapper">
+                <span class="price-prefix">R$</span>
+                <input type="text" id="preco-custo" name="preco-custo" class="form-input" placeholder="0,00">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="quantidade-estoque" class="form-label">Quantidade em Estoque</label>
+              <input type="number" id="quantidade-estoque" name="quantidade-estoque" class="form-input" min="0" placeholder="Ex: 5">
+            </div>
+
+            <div class="form-group">
+              <label for="tempo-producao" class="form-label">Tempo de Producao (dias)</label>
+              <input type="number" id="tempo-producao" name="tempo-producao" class="form-input" min="1" placeholder="Ex: 7">
+            </div>
+
+            <div class="form-group form-group--full">
+              <label class="form-label">Status do Produto *</label>
+              <div class="status-options" id="status-options">
+                <label class="status-option active">
+                  <input type="radio" name="status" value="disponivel" checked>
+                  <span class="status-dot status-dot--disponivel"></span>
+                  Disponivel
+                </label>
+                <label class="status-option">
+                  <input type="radio" name="status" value="sob-encomenda">
+                  <span class="status-dot status-dot--sob-encomenda"></span>
+                  Sob Encomenda
+                </label>
+                <label class="status-option">
+                  <input type="radio" name="status" value="indisponivel">
+                  <span class="status-dot status-dot--indisponivel"></span>
+                  Indisponivel
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Dimensoes e Detalhes -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+            Dimensoes e Detalhes
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="largura" class="form-label">Largura (cm)</label>
+              <input type="text" id="largura" name="largura" class="form-input" placeholder="Ex: 30">
+            </div>
+
+            <div class="form-group">
+              <label for="altura" class="form-label">Altura / Comprimento (cm)</label>
+              <input type="text" id="altura" name="altura" class="form-input" placeholder="Ex: 45">
+            </div>
+
+            <div class="form-group">
+              <label for="peso" class="form-label">Peso (gramas)</label>
+              <input type="text" id="peso" name="peso" class="form-input" placeholder="Ex: 150">
+            </div>
+
+            <div class="form-group">
+              <label for="tecnica" class="form-label">Tecnica Utilizada</label>
+              <select id="tecnica" name="tecnica" class="form-select">
+                <option value="" disabled selected>Selecione</option>
+                <option value="ponto-cruz">Ponto Cruz</option>
+                <option value="hardanger">Hardanger</option>
+                <option value="vagonite">Vagonite</option>
+                <option value="croche">Croche</option>
+                <option value="trico">Trico</option>
+                <option value="macrame">Macrame</option>
+                <option value="patchwork">Patchwork</option>
+                <option value="bordado-livre">Bordado Livre</option>
+                <option value="pintura-tecido">Pintura em Tecido</option>
+                <option value="costura-criativa">Costura Criativa</option>
+                <option value="mista">Tecnica Mista</option>
+                <option value="outra">Outra</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Observacoes -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Observacoes
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label for="observacoes" class="form-label">Anotacoes Adicionais</label>
+              <textarea id="observacoes" name="observacoes" class="form-textarea" rows="3" placeholder="Informacoes extras sobre o produto, instrucoes de cuidado, personalizacoes disponiveis..."></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Botoes de acao -->
+        <div class="form-actions">
+          <a href="#" class="btn-secondary">Cancelar</a>
+          <button type="submit" class="btn-salvar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Salvar Produto
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+  
