@@ -9,6 +9,9 @@ import { RelatoriosComponent } from './features/relatorios/relatorios.component'
 import { EncomendasComponent } from './features/encomendas/encomendas.component';
 import { CadastroClienteComponent } from './features/cadastro-cliente/cadastro-cliente.component';
 import { CadastroMateriaisComponent } from './features/cadastro-materiais/cadastro-materiais.component';
+import { ProdutosComponent } from './features/produtos/produtos.component';
+import { CadastroProdutosComponent } from './features/cadastro-produtos/cadastro-produtos.component';
+import { PerfilComponent } from './features/perfil/perfil.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent},
@@ -17,9 +20,12 @@ export const routes: Routes = [
     { path: 'materiais', component: MateriaisComponent},
     { path: 'clientes', component: ClientesComponent},
     { path: 'pedidos', component: PedidosComponent},
+    { path: 'produtos', component: ProdutosComponent},
     { path: 'relatorios', component: RelatoriosComponent},
     { path: 'encomenda', component: EncomendasComponent},
-    { path: 'clientes/cadastro-cliente', component: CadastroClienteComponent},
-    { path: 'materiais/cadastro-material', component: CadastroMateriaisComponent},
+    { path: 'clientes/cadastro', component: CadastroClienteComponent},
+    { path: 'materiais/cadastro', component: CadastroMateriaisComponent},
+    { path: 'produtos/cadastro', component: CadastroProdutosComponent},
+    { path: 'meu-perfil', component: PerfilComponent},
     { path: '', redirectTo: 'login', pathMatch: 'full'},
 ];
