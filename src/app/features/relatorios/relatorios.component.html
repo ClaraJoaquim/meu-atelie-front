@@ -1,0 +1,228 @@
+<app-header></app-header>
+
+  <main class="main">
+    <div class="container">
+
+      <section class="page-header">
+        <div class="page-header-text">
+          <h2 class="page-title">Relatorios</h2>
+          <p class="page-subtitle">Acompanhe o desempenho do seu atelie de bordado.</p>
+        </div>
+      </section>
+
+      <section class="period-filter" aria-label="Selecionar periodo">
+        <div class="filter-tabs">
+          <a href="#" class="filter-tab">Semana</a>
+          <a href="#" class="filter-tab filter-tab--active">Mes</a>
+          <a href="#" class="filter-tab">Trimestre</a>
+          <a href="#" class="filter-tab">Ano</a>
+        </div>
+      </section>
+
+      <section class="summary-section" aria-label="Metricas do periodo">
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <div class="card-icon-wrapper card-icon--progress">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="card-content">
+              <span class="card-number">R$ 4.850</span>
+              <span class="card-label">Faturamento do mes</span>
+            </div>
+            <div class="metric-trend metric-trend--up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              +12%
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="card-icon-wrapper card-icon--done">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="card-content">
+              <span class="card-number">15</span>
+              <span class="card-label">Pedidos no mes</span>
+            </div>
+            <div class="metric-trend metric-trend--up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              +8%
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="card-icon-wrapper card-icon--progress">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="card-content">
+              <span class="card-number">5</span>
+              <span class="card-label">Novos clientes</span>
+            </div>
+            <div class="metric-trend metric-trend--up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+              +25%
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="card-icon-wrapper card-icon--late">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="card-content">
+              <span class="card-number">R$ 323</span>
+              <span class="card-label">Ticket medio</span>
+            </div>
+            <div class="metric-trend metric-trend--down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+              -3%
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="chart-section" aria-label="Grafico de faturamento mensal">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Faturamento Mensal (2026)
+        </h3>
+        <div class="bar-chart">
+          <div class="bar-chart-row">
+            <span class="bar-label">Jan</span>
+            <div class="bar-track">
+              <div class="bar-fill" style="width: 72%"></div>
+            </div>
+            <span class="bar-value">R$ 3.600</span>
+          </div>
+          <div class="bar-chart-row">
+            <span class="bar-label">Fev</span>
+            <div class="bar-track">
+              <div class="bar-fill bar-fill--current" style="width: 97%"></div>
+            </div>
+            <span class="bar-value">R$ 4.850</span>
+          </div>
+          <div class="bar-chart-row bar-chart-row--projected">
+            <span class="bar-label">Mar</span>
+            <div class="bar-track">
+              <div class="bar-fill bar-fill--projected" style="width: 85%"></div>
+            </div>
+            <span class="bar-value bar-value--projected">R$ 4.250*</span>
+          </div>
+        </div>
+        <p class="chart-note">* Valor estimado com base nos pedidos em andamento.</p>
+      </section>
+
+      <section class="orders-section" aria-label="Tipos mais vendidos">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Tipos de Bordado Mais Pedidos
+        </h3>
+        <div class="orders-table-wrapper">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Posicao</th>
+                <th>Tipo de Bordado</th>
+                <th>Quantidade</th>
+                <th>Receita</th>
+                <th>% do Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Posicao">1</td>
+                <td data-label="Tipo">Toalha de mesa bordada</td>
+                <td data-label="Quantidade">8</td>
+                <td data-label="Receita">R$ 2.240</td>
+                <td data-label="% Total">
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: 46%"></div>
+                    <span class="progress-text">46%</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Posicao">2</td>
+                <td data-label="Tipo">Enxoval de bebe</td>
+                <td data-label="Quantidade">5</td>
+                <td data-label="Receita">R$ 1.900</td>
+                <td data-label="% Total">
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: 39%"></div>
+                    <span class="progress-text">39%</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Posicao">3</td>
+                <td data-label="Tipo">Pano de prato (kit)</td>
+                <td data-label="Quantidade">4</td>
+                <td data-label="Receita">R$ 600</td>
+                <td data-label="% Total">
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: 12%"></div>
+                    <span class="progress-text">12%</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="Posicao">4</td>
+                <td data-label="Tipo">Camiseta bordada</td>
+                <td data-label="Quantidade">3</td>
+                <td data-label="Receita">R$ 255</td>
+                <td data-label="% Total">
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar" style="width: 5%"></div>
+                    <span class="progress-text">5%</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="orders-section" aria-label="Melhores clientes">
+        <h3 class="section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Melhores Clientes do Periodo
+        </h3>
+        <div class="orders-table-wrapper">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Pedidos</th>
+                <th>Valor Total</th>
+                <th>Ultimo Pedido</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Cliente">Fernanda Lima</td>
+                <td data-label="Pedidos">4</td>
+                <td data-label="Valor Total">R$ 1.280</td>
+                <td data-label="Ultimo Pedido">05/02/2026</td>
+              </tr>
+              <tr>
+                <td data-label="Cliente">Lucia Mendes</td>
+                <td data-label="Pedidos">3</td>
+                <td data-label="Valor Total">R$ 980</td>
+                <td data-label="Ultimo Pedido">10/02/2026</td>
+              </tr>
+              <tr>
+                <td data-label="Cliente">Roberto Alves</td>
+                <td data-label="Pedidos">2</td>
+                <td data-label="Valor Total">R$ 900</td>
+                <td data-label="Ultimo Pedido">08/02/2026</td>
+              </tr>
+              <tr>
+                <td data-label="Cliente">Ana Silva</td>
+                <td data-label="Pedidos">2</td>
+                <td data-label="Valor Total">R$ 760</td>
+                <td data-label="Ultimo Pedido">28/01/2026</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <app-footer></app-footer>
