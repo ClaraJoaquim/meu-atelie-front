@@ -1,0 +1,103 @@
+/* ============================================
+   CLIENTES - Estilos especificos
+   Cards de clientes com avatar, info e stats
+   ============================================ */
+
+.clients-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.client-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.client-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.client-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.client-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.client-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.client-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-input);
+  margin-bottom: var(--space-sm);
+}
+
+.client-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.9rem;
+  color: var(--secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.client-stats {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.client-stat {
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.client-stat strong {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+@media (min-width: 768px) {
+  .client-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .client-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
