@@ -191,7 +191,7 @@ button[disabled] {
 }
 
 .header-inner {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: var(--space-md) var(--space-xl);
   display: flex;
@@ -345,10 +345,6 @@ button[disabled] {
 /* ============================================
    CONTEUDO PRINCIPAL & CONTAINERS
    ============================================ */
-.main {
-  padding: var(--space-xl) var(--space-md);
-  min-height: calc(100vh - 200px);
-}
 
 .container {
   max-width: 1200px;
@@ -631,6 +627,7 @@ button[disabled] {
   min-height: 56px;
   text-align: center;
   align-self: flex-start;
+  display: inline-flex;
 }
 
 .btn-nova-encomenda:hover {
