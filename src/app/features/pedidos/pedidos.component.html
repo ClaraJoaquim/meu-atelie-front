@@ -1,0 +1,181 @@
+<app-header></app-header>
+
+  <!-- CONTEUDO PRINCIPAL -->
+  <main class="main">
+    <div class="container">
+
+      <!-- Titulo da pagina e acoes -->
+      <section class="page-header">
+        <div class="page-header-text">
+          <h2 class="page-title">Pedidos</h2>
+          <p class="page-subtitle">Gerencie todas as suas encomendas de bordado.</p>
+        </div>
+        <a routerLink="/encomenda" class="btn-nova-encomenda">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nova Encomenda
+        </a>
+      </section>
+
+      <!-- Filtros de status -->
+      <section class="filters-section" aria-label="Filtros de pedidos">
+        <div class="filter-tabs">
+          <a href="#" class="filter-tab filter-tab--active">
+            Todos
+            <span class="filter-count">33</span>
+          </a>
+          <a href="#" class="filter-tab">
+            Em andamento
+            <span class="filter-count filter-count--progress">8</span>
+          </a>
+          <a href="#" class="filter-tab">
+            Finalizados
+            <span class="filter-count filter-count--done">23</span>
+          </a>
+          <a href="#" class="filter-tab">
+            Atrasados
+            <span class="filter-count filter-count--late">2</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Barra de busca -->
+      <section class="search-section" aria-label="Buscar pedidos">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" placeholder="Buscar por cliente, tipo ou numero do pedido...">
+        </div>
+      </section>
+
+      <!-- Lista completa de pedidos -->
+      <section class="orders-section" aria-label="Lista de pedidos">
+        <div class="orders-table-wrapper">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Tipo de Bordado</th>
+                <th>Data do Pedido</th>
+                <th>Prazo</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Pedido">#052</td>
+                <td data-label="Cliente">Lucia Mendes</td>
+                <td data-label="Tipo">Toalha de mesa bordada</td>
+                <td data-label="Data">10/02/2026</td>
+                <td data-label="Prazo">25/02/2026</td>
+                <td data-label="Valor">R$ 280,00</td>
+                <td data-label="Status"><span class="status-badge status--progress">Em andamento</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#051</td>
+                <td data-label="Cliente">Roberto Alves</td>
+                <td data-label="Tipo">Jogo de cama personalizado</td>
+                <td data-label="Data">08/02/2026</td>
+                <td data-label="Prazo">22/02/2026</td>
+                <td data-label="Valor">R$ 450,00</td>
+                <td data-label="Status"><span class="status-badge status--progress">Em andamento</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#050</td>
+                <td data-label="Cliente">Fernanda Lima</td>
+                <td data-label="Tipo">Pano de prato (kit 5)</td>
+                <td data-label="Data">05/02/2026</td>
+                <td data-label="Prazo">20/02/2026</td>
+                <td data-label="Valor">R$ 150,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#049</td>
+                <td data-label="Cliente">Joao Pereira</td>
+                <td data-label="Tipo">Camiseta bordada</td>
+                <td data-label="Data">03/02/2026</td>
+                <td data-label="Prazo">18/02/2026</td>
+                <td data-label="Valor">R$ 85,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#048</td>
+                <td data-label="Cliente">Maria Clara</td>
+                <td data-label="Tipo">Almofada decorativa</td>
+                <td data-label="Data">01/02/2026</td>
+                <td data-label="Prazo">15/02/2026</td>
+                <td data-label="Valor">R$ 120,00</td>
+                <td data-label="Status"><span class="status-badge status--late">Atrasado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#047</td>
+                <td data-label="Cliente">Ana Silva</td>
+                <td data-label="Tipo">Enxoval de bebe bordado</td>
+                <td data-label="Data">28/01/2026</td>
+                <td data-label="Prazo">14/02/2026</td>
+                <td data-label="Valor">R$ 380,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#046</td>
+                <td data-label="Cliente">Carlos Souza</td>
+                <td data-label="Tipo">Toalha de banho personalizada</td>
+                <td data-label="Data">25/01/2026</td>
+                <td data-label="Prazo">12/02/2026</td>
+                <td data-label="Valor">R$ 95,00</td>
+                <td data-label="Status"><span class="status-badge status--late">Atrasado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#045</td>
+                <td data-label="Cliente">Patricia Oliveira</td>
+                <td data-label="Tipo">Guardanapos (kit 12)</td>
+                <td data-label="Data">22/01/2026</td>
+                <td data-label="Prazo">10/02/2026</td>
+                <td data-label="Valor">R$ 240,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#044</td>
+                <td data-label="Cliente">Ricardo Santos</td>
+                <td data-label="Tipo">Camisa polo bordada (lote 10)</td>
+                <td data-label="Data">20/01/2026</td>
+                <td data-label="Prazo">05/02/2026</td>
+                <td data-label="Valor">R$ 650,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+              <tr>
+                <td data-label="Pedido">#043</td>
+                <td data-label="Cliente">Sandra Costa</td>
+                <td data-label="Tipo">Quadro decorativo bordado</td>
+                <td data-label="Data">18/01/2026</td>
+                <td data-label="Prazo">01/02/2026</td>
+                <td data-label="Valor">R$ 320,00</td>
+                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Paginacao -->
+      <nav class="pagination" aria-label="Paginacao dos pedidos">
+        <a href="#" class="pagination-btn pagination-btn--disabled" aria-disabled="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="15 18 9 12 15 6"/></svg>
+          Anterior
+        </a>
+        <div class="pagination-pages">
+          <a href="#" class="pagination-page pagination-page--active">1</a>
+          <a href="#" class="pagination-page">2</a>
+          <a href="#" class="pagination-page">3</a>
+          <a href="#" class="pagination-page">4</a>
+        </div>
+        <a href="#" class="pagination-btn">
+          Proximo
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </nav>
+
+    </div>
+  </main>
+
+<app-footer></app-footer>
