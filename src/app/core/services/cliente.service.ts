@@ -27,6 +27,13 @@ export class ClienteService {
     });
 
   }
+  
+  listarResumoClientes(): Observable<ClienteResumo[]> {
+    const token = localStorage.getItem('token');
+    return this.http.get<ClienteResumo[]>(`${this.apiUrl}/resumo`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
 
   listarCanais(): Observable<CanalAquisicao[]> {
     return this.http.get<CanalAquisicao[]>(`${this.apiUrl}/canal-aquisicao`);
