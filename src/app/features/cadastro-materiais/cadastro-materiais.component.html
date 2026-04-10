@@ -1,0 +1,164 @@
+<app-header></app-header>
+
+  <main class="main">
+    <div class="container">
+
+      <section class="page-header">
+        <div class="page-header-text">
+          <a routerLink="/materiais" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Voltar para Materiais
+          </a>
+          <h2 class="page-title">Novo Material</h2>
+          <p class="page-subtitle">Cadastre um novo item no controle de estoque.</p>
+        </div>
+      </section>
+
+      <form class="form-card" action="#" method="post">
+
+        <!-- Secao: Identificacao do material -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Identificacao do Material
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label for="nome-material" class="form-label">Nome do Material *</label>
+              <input type="text" id="nome-material" name="nome-material" class="form-input" placeholder="Ex: Linha mouline azul (#796)" required>
+            </div>
+
+            <div class="form-group">
+              <label for="categoria" class="form-label">Categoria *</label>
+              <select id="categoria" name="categoria" class="form-select" required>
+                <option value="" disabled selected>Selecione a categoria</option>
+                <option value="linhas">Linhas</option>
+                <option value="tecidos">Tecidos</option>
+                <option value="aviamentos">Aviamentos</option>
+                <option value="agulhas">Agulhas</option>
+                <option value="bastidores">Bastidores</option>
+                <option value="tesouras">Tesouras e Cortadores</option>
+                <option value="fitas">Fitas e Rendas</option>
+                <option value="entretelas">Entretelas</option>
+                <option value="outros">Outros</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="codigo" class="form-label">Codigo / Referencia</label>
+              <input type="text" id="codigo" name="codigo" class="form-input" placeholder="Ex: DMC-321, ANC-796">
+            </div>
+
+            <div class="form-group">
+              <label for="cor" class="form-label">Cor</label>
+              <input type="text" id="cor" name="cor" class="form-input" placeholder="Ex: Vermelho, Azul marinho">
+            </div>
+
+            <div class="form-group">
+              <label for="marca" class="form-label">Marca</label>
+              <input type="text" id="marca" name="marca" class="form-input" placeholder="Ex: DMC, Anchor, Singer">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Estoque -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            Estoque
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="quantidade" class="form-label">Quantidade em Estoque *</label>
+              <input type="number" id="quantidade" name="quantidade" class="form-input" min="0" placeholder="Ex: 25" required>
+            </div>
+
+            <div class="form-group">
+              <label for="unidade" class="form-label">Unidade de Medida *</label>
+              <select id="unidade" name="unidade" class="form-select" required>
+                <option value="" disabled selected>Selecione</option>
+                <option value="meadas">Meadas</option>
+                <option value="metros">Metros</option>
+                <option value="unidades">Unidades</option>
+                <option value="rolos">Rolos</option>
+                <option value="cones">Cones</option>
+                <option value="pacotes">Pacotes</option>
+                <option value="quilos">Quilos</option>
+                <option value="pares">Pares</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="estoque-minimo" class="form-label">Estoque Minimo (alerta)</label>
+              <input type="number" id="estoque-minimo" name="estoque-minimo" class="form-input" min="0" placeholder="Ex: 10">
+            </div>
+
+            <div class="form-group">
+              <label for="localizacao" class="form-label">Localizacao no Atelie</label>
+              <input type="text" id="localizacao" name="localizacao" class="form-input" placeholder="Ex: Armario A, Prateleira 2">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Fornecedor e custo -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Fornecedor e Custo
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fornecedor" class="form-label">Fornecedor</label>
+              <input type="text" id="fornecedor" name="fornecedor" class="form-input" placeholder="Ex: Armarinho Sao Jose">
+            </div>
+
+            <div class="form-group">
+              <label for="telefone-fornecedor" class="form-label">Telefone do Fornecedor</label>
+              <input type="tel" id="telefone-fornecedor" name="telefone-fornecedor" class="form-input" placeholder="(00) 00000-0000">
+            </div>
+
+            <div class="form-group">
+              <label for="preco-unitario" class="form-label">Preco Unitario (R$)</label>
+              <input type="text" id="preco-unitario" name="preco-unitario" class="form-input" placeholder="0,00">
+            </div>
+
+            <div class="form-group">
+              <label for="data-ultima-compra" class="form-label">Data da Ultima Compra</label>
+              <input type="date" id="data-ultima-compra" name="data-ultima-compra" class="form-input">
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Secao: Observacoes -->
+        <fieldset class="form-section">
+          <legend class="form-legend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Observacoes
+          </legend>
+
+          <div class="form-grid">
+            <div class="form-group form-group--full">
+              <label for="observacoes" class="form-label">Anotacoes Adicionais</label>
+              <textarea id="observacoes" name="observacoes" class="form-textarea" rows="3" placeholder="Informacoes extras sobre o material, onde comprar, substitutos..."></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Botoes de acao -->
+        <div class="form-actions">
+          <a href="materiais.html" class="btn-secondary">Cancelar</a>
+          <button type="submit" class="btn-nova-encomenda">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Salvar Material
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+<app-footer></app-footer>
