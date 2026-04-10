@@ -7,15 +7,14 @@
   z-index: 100;
 }
 
-.header-inner {
-  max-width: 1200px;
+/* .header-inner {
   margin: 0 auto;
-  padding: var(--space-md) var(--space-xl);
+  padding: var(--space-md);
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative !important;
-}
+} */
 
 .logo {
   display: flex;
