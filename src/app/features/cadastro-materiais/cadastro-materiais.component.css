@@ -45,6 +45,7 @@
   font-size: 1.15rem;
   font-weight: 700;
   color: var(--primary);
+  margin-top: var(--space-lg);
   margin-bottom: var(--space-lg);
   padding-bottom: var(--space-md);
   border-bottom: 2px solid var(--border);
@@ -145,6 +146,58 @@
   background-color: var(--accent);
 }
 
+.input-with-action {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.input-with-action .form-select {
+  flex: 2;
+}
+
+.btn-add {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-md);
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-add:hover {
+  border-color: var(--primary);
+  background-color: var(--accent);
+}
+
+.dialog-modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  background: transparent;
+  margin: auto;
+  max-width: 450px;
+  width: 100%;
+}
+
+.dialog-modal::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-content {
+  background-color: var(--surface);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
 
 /* ============================================
    RESPONSIVIDADE
@@ -162,4 +215,38 @@
   .form-card {
     padding: var(--space-2xl);
   }
+}
+
+
+.btn-sm:hover svg {
+  transform: scale(1.2);
+  transition: transform 0.2s;
+}
+
+.dialog-modal {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+}
+
+.dialog-modal::backdrop {
+  background: rgba(116, 60, 20, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-content {
+  padding: var(--space-xl);
+  background: var(--surface);
+}
+
+.btn-add {
+  background-color: var(--accent);
+  color: var(--primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 0 15px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
 }
