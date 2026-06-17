@@ -113,7 +113,7 @@ img {
   font-size: 16px;
   color: var(--text-input);
   background-color: var(--input-bg);
-  border: 2px solid var(--secondary);
+  border: 2px solid var(--border);
   border-radius: 10px;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -600,6 +600,7 @@ button[disabled] {
   font-size: 1.65rem;
   font-weight: 700;
   color: var(--primary);
+  font-family: 'Lobster Two', cursivej;
   line-height: 1.3;
 }
 
