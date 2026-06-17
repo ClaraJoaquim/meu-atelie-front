@@ -3,16 +3,16 @@ import { HeaderComponent } from '../../shared/components/header/header.component
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteForm } from '../../core/models/cliente-form';
 import { ClienteService } from '../../core/services/cliente.service';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { CanalAquisicao } from '../../core/models/canal-aquisicao';
-import { NgFor } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro-cliente',
-  imports: [HeaderComponent, FooterComponent, RouterModule, ReactiveFormsModule, NgFor, ModalComponent],
+  imports: [HeaderComponent, FooterComponent, RouterModule, ReactiveFormsModule, NgFor, ModalComponent, CommonModule],
   templateUrl: './cadastro-cliente.component.html',
   styleUrl: './cadastro-cliente.component.css'
 })
@@ -35,11 +35,11 @@ export class CadastroClienteComponent {
     });
 
     this.clienteForm = this.fb.group({
-      nome: [''],
+      nome: ['', [Validators.required]],
       cpf: [''],
       cnpj: [''],
       dataNascimento: [''],
-      telefone: [''],
+      telefone: ['', [Validators.required]],
       email: [''],
       observacoes: [''],
       canalId: [null],
@@ -99,58 +99,46 @@ export class CadastroClienteComponent {
 
   cadastrar() {
     if (this.clienteForm.invalid) {
-      return;
+        this.clienteForm.markAllAsTouched();
+        this.modal.abrirModal(
+          'Dados Obrigatórios',
+          'Nome e Telefone são obrigatórios. Por favor, verifique os dados e tente novamente.',
+          'erro',
+          'Fechar'
+        );
+        return; 
     }
 
-    const telefoneFormatado = this.clienteForm.get('telefone')?.value || '';
-    const telefoneLimpo = telefoneFormatado.replace(/\D/g, '');
-    const cepLimpo = this.clienteForm.get('cep')?.value.replace(/\D/g, '');
-
+    const formValue = this.clienteForm.value;
+    
     const novoCliente: ClienteForm = {
-      nome: this.clienteForm.get('nome')?.value,
-      email: this.clienteForm.get('email')?.value,
-      telefone: telefoneLimpo,
-      cnpj: this.clienteForm.get('cnpj')?.value,
-      dataNascimento: this.clienteForm.get('dataNascimento')?.value,
-      observacoes: this.clienteForm.get('observacoes')?.value,
-      canalId: this.clienteForm.get('canalId')?.value,
+      nome: formValue.nome,
+      email: formValue.email || null,
+      telefone: formValue.telefone.replace(/\D/g, ''),
+      cnpj: formValue.cnpj || null,
+      dataNascimento: formValue.dataNascimento || null,
+      observacoes: formValue.observacoes || null,
+      canalId: (formValue.canalId !== null && formValue.canalId !== "") ? formValue.canalId : null,
 
       endereco: {
-        rua: this.clienteForm.get('endereco')?.value,
-        numero: this.clienteForm.get('numero')?.value,
-        bairro: this.clienteForm.get('bairro')?.value,
-        cidade: this.clienteForm.get('cidade')?.value,
-        estado: this.clienteForm.get('estado')?.value,
-        cep: cepLimpo
+        rua: formValue.endereco || null,
+        numero: formValue.numero || null,
+        bairro: formValue.bairro || null,
+        cidade: formValue.cidade || null,
+        estado: formValue.estado || null,
+        cep: formValue.cep ? formValue.cep.replace(/\D/g, '') : null
       }
     };
 
-    this.clienteService.cadastrarCliente(novoCliente).subscribe({
-      next: (res) => {
-        this.modal.abrirModal(
-          'Sucesso!',
-          'Cliente cadastrado com sucesso.',
-          'sucesso',
-          'Continuar'
-        );
-
-        this.modal.acaoConfirmada.subscribe(() => {
-          this.router.navigate(['/clientes']);
-        });
-      },
-      error: (err) => {
-        if (this.modal) {
-          this.modal.abrirModal(
-            'Erro',
-            'Ocorreu um erro inesperado. Tente novamente.',
-            'erro',
-            'Fechar'
-          );
-        } else {
-          console.error('Modal não inicializado', err);
-        }
-      }
-    });
+this.clienteService.cadastrarCliente(novoCliente).subscribe({
+    next: (res) => {
+      this.modal.abrirModal('Sucesso!', 'Cliente cadastrado com sucesso.', 'sucesso', 'Continuar');
+      this.modal.acaoConfirmada.subscribe(() => this.router.navigate(['/clientes']));
+    },
+    error: (err) => {
+      this.modal.abrirModal('Erro', 'Ocorreu um erro ao salvar no servidor. Tente novamente.', 'erro', 'Fechar');
+    }
+  });
   }
 
   get nome() { return this.clienteForm.get('nome'); }
