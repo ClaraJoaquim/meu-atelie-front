@@ -11,23 +11,21 @@ declare var bootstrap: any;
 })
 export class ModalComponent {
 @ViewChild('meuModal') modalRef!: ElementRef;
-  @Output() acaoConfirmada = new EventEmitter<void>(); // Emite evento quando clica no botão principal
+  @Output() acaoConfirmada = new EventEmitter<void>();
 
   titulo: string = '';
   mensagem: string = '';
-  tipo: 'sucesso' | 'erro' = 'sucesso'; // Controla a cor
+  tipo: 'sucesso' | 'erro' = 'sucesso';
   textoBotao: string = 'OK';
   
   private modalBootstrap: any;
 
-  // Método que o Pai vai chamar para abrir o modal
   abrirModal(titulo: string, mensagem: string, tipo: 'sucesso' | 'erro', textoBotao: string = 'OK') {
     this.titulo = titulo;
     this.mensagem = mensagem;
     this.tipo = tipo;
     this.textoBotao = textoBotao;
 
-    // Inicializa e mostra o modal
     this.modalBootstrap = new bootstrap.Modal(this.modalRef.nativeElement);
     this.modalBootstrap.show();
   }
@@ -37,7 +35,7 @@ export class ModalComponent {
   }
 
   confirmar() {
-    this.acaoConfirmada.emit(); // Avisa o pai que o botão foi clicado
+    this.acaoConfirmada.emit();
     this.fecharModal();
   }
 }
