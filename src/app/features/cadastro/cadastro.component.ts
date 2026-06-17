@@ -26,17 +26,24 @@ export class CadastroComponent {
   ) { }
 
   ngOnInit() {
-    this.cadastroForm = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
-      telefone: ['', [Validators.required]],
-      cpf: ['', [Validators.required, validarCpfBackend]],
-      senha: ['', [Validators.required, Validators.minLength(6)]],
-      confirmarSenha: ['', [Validators.required]]
-    }, {
-      validators: this.validarSenha
-    });
-  }
+  this.cadastroForm = this.formBuilder.group({
+    nome: ['', Validators.required],
+    email: ['', [Validators.email]],
+    cpf: ['', [validarCpfBackend]], 
+    telefone: ['', Validators.required],
+    senha: ['', [Validators.required, Validators.minLength(6)]],
+    confirmarSenha: ['', Validators.required],
+
+    nomeLoja: ['', Validators.required],
+    descricaoLoja: [''],
+    cnpj: [''], 
+    whatsapp: ['', Validators.required],
+    facebook: [''],
+    instagram: ['']
+  }, {
+    validators: this.validarSenha
+  });
+}
 
   cadastrar() {
     if (this.cadastroForm.invalid) {
@@ -49,15 +56,24 @@ export class CadastroComponent {
     const cpfFormatado = this.cadastroForm.get('cpf')?.value || '';
     const cpfLimpo = cpfFormatado.replace(/\D/g, '');
 
+    const cnpjLimpo = this.cadastroForm.get('cnpj')?.value.replace(/\D/g, '');
+    const whatsLimpo = this.cadastroForm.get('whatsapp')?.value.replace(/\D/g, '');
+
     const telefoneFormatado = this.cadastroForm.get('telefone')?.value || '';
     const telefoneLimpo = telefoneFormatado.replace(/\D/g, '');
 
-    const novoUsuario: Usuario = {
+    const novoUsuario: any = {
       nome: this.cadastroForm.get('nome')?.value,
       email: this.cadastroForm.get('email')?.value,
       senha: this.cadastroForm.get('senha')?.value,
       cpf: cpfLimpo,
-      telefone: telefoneLimpo
+      telefone: telefoneLimpo,
+      nomeLoja: this.cadastroForm.get('nomeLoja')?.value,
+      descricaoLoja: this.cadastroForm.get('descricaoLoja')?.value,
+      cnpj: cnpjLimpo,
+      whatsapp: whatsLimpo,
+      facebook: this.cadastroForm.get('facebook')?.value,
+      instagram: this.cadastroForm.get('instagram')?.value
     };
 
     this.usuarioService.criarUsuario(novoUsuario).subscribe({
@@ -147,6 +163,35 @@ export class CadastroComponent {
     this.cadastroForm.get('cpf')?.setValue(valor, { emitEvent: false });
   }
 
+  formatarWhatsApp(event: any) {
+    let valor = event.target.value.replace(/\D/g, '');
+
+    if (valor.length > 11) valor = valor.slice(0, 11);
+    if (valor.length > 2) {
+      valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2');
+    }
+    if (valor.length > 7) {
+      valor = valor.replace(/(\d{5})(\d{4})$/, '$1-$2');
+    }
+
+    event.target.value = valor;
+    this.cadastroForm.get('whatsapp')?.setValue(valor, { emitEvent: false });
+  }
+
+  formatarCNPJ(event: any) {
+    let valor = event.target.value.replace(/\D/g, '');
+
+    if (valor.length > 14) valor = valor.slice(0, 14);
+
+    valor = valor.replace(/^(\d{2})(\d)/, '$1.$2');
+    valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+    valor = valor.replace(/\.(\d{3})(\d)/, '.$1/$2');
+    valor = valor.replace(/(\d{4})(\d)/, '$1-$2');
+
+    event.target.value = valor;
+    this.cadastroForm.get('cnpj')?.setValue(valor, { emitEvent: false });
+  }
+
   // Getters
   get nome() { return this.cadastroForm.get('nome'); }
   get email() { return this.cadastroForm.get('email'); }
@@ -156,7 +201,6 @@ export class CadastroComponent {
   get confirmarSenha() { return this.cadastroForm.get('confirmarSenha'); }
 }
 
-// Função auxiliar para validar CPF
 function validarCpfBackend(control: AbstractControl): ValidationErrors | null {
   if (!control.value) return null;
 
