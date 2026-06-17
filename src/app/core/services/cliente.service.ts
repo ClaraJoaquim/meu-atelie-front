@@ -20,7 +20,7 @@ export class ClienteService {
 
   cadastrarCliente(cliente: ClienteForm): Observable<ClienteForm> {
     const token = localStorage.getItem('token');
-    return this.http.post<ClienteForm>(this.apiUrl, cliente, {
+    return this.http.post<ClienteForm>(`${this.apiUrl}/cadastrar`, cliente, {
       headers: {
         Authorization: `Bearer ${token}`
       }
