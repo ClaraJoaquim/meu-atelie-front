@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component';
@@ -20,6 +20,9 @@ export class ClientesComponent {
   clientesFiltrados: ClienteResumo[] = [];
   termoBusca: string = '';
 
+  paginaAtual: number = 1;
+pageSize: number = 9;
+
   totalClientes: number = 0;
   clientesRecorrentes: number = 0;
   novosEsteMes: number = 0;
@@ -28,18 +31,24 @@ export class ClientesComponent {
 
   ngOnInit() {
     this.carregarClientes();
+    this.ajustarQuantidadePagina(window.innerWidth);
   }
 
   carregarClientes() {
-    this.clienteService.listarResumoClientes().subscribe({
-      next: (dados) => {
-        this.clientes = dados;
-        this.clientesFiltrados = dados;
-        this.calcularMetricas();
-      },
-      error: (err) => console.error('Erro ao buscar resumo', err)
-    });
-  }
+  this.clienteService.listarResumoClientes().subscribe({
+    next: (dados) => {
+      this.clientes = dados.sort((a, b) => {
+        const dataA = a.dataCadastro ? new Date(a.dataCadastro).getTime() : 0;
+        const dataB = b.dataCadastro ? new Date(b.dataCadastro).getTime() : 0;
+        return dataB - dataA; 
+      });
+
+      this.clientesFiltrados = [...this.clientes];
+      this.calcularMetricas();
+    },
+    error: (err) => console.error('Erro ao buscar resumo', err)
+  });
+}
 
   calcularMetricas() {
     this.totalClientes = this.clientes.length;
@@ -55,7 +64,32 @@ export class ClientesComponent {
     }).length;
   }
 
-  filtrarClientes() {
+  @HostListener('window:resize', ['$event'])
+onResize(event: any) {
+  this.ajustarQuantidadePagina(event.target.innerWidth);
+}
+
+private ajustarQuantidadePagina(width: number) {
+  if (width < 768) {
+    this.pageSize = 3;
+  } else if (width < 1024) {
+    this.pageSize = 6;
+  } else {
+    this.pageSize = 9;
+  }
+}
+
+get clientesExibidos() {
+  const inicio = (this.paginaAtual - 1) * this.pageSize;
+  return this.clientesFiltrados.slice(inicio, inicio + this.pageSize);
+}
+
+get totalPaginas(): number {
+  return Math.ceil(this.clientesFiltrados.length / this.pageSize);
+}
+
+filtrarClientes() {
+    this.paginaAtual = 1; 
     const termo = this.termoBusca?.trim().toLowerCase();
     if (!termo) {
       this.clientesFiltrados = this.clientes;

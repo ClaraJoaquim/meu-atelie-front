@@ -12,7 +12,7 @@
 .client-cards {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .client-card {
@@ -85,6 +85,28 @@
   color: var(--primary);
 }
 
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.btn-pagination {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.btn-pagination:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 /* ============================================
    RESPONSIVIDADE
@@ -92,7 +114,6 @@
 @media (min-width: 768px) {
   .client-cards {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-lg);
   }
 }
 
