@@ -30,6 +30,7 @@ export class MateriaisComponent implements OnInit {
   modoEdicao: boolean = false;
   idMaterialParaDeletar: number | null = null;
   mensagemSucesso: string = '';
+  listaEstoqueBaixo: any[] = [];
 
   ngOnInit() {
     this.carregarMateriais();
@@ -38,7 +39,9 @@ export class MateriaisComponent implements OnInit {
 
   carregarMateriais() {
     this.materialService.listarTodos().subscribe(dados => {
-      this.listaMateriais = dados.sort((a, b) => a.id - b.id);
+      this.listaMateriais = dados.sort((a: any, b: any) => a.id - b.id);
+      
+      this.atualizarListaEstoqueBaixo();
     });
   }
 
@@ -46,16 +49,6 @@ export class MateriaisComponent implements OnInit {
     this.fornecedorService.listarTodos().subscribe(dados => {
       this.fornecedores = dados;
     });
-  }
-
-  get qtdEstoqueBaixo(): number {
-    return this.listaMateriais.filter(item => 
-      item.estoqueMinimo != null && item.quantidadeEstoque <= item.estoqueMinimo
-    ).length;
-  }
-
-  get qtdEstoqueNormal(): number {
-    return this.listaMateriais.length - this.qtdEstoqueBaixo;
   }
 
   abrirModalMaterial() {
@@ -182,5 +175,38 @@ export class MateriaisComponent implements OnInit {
 
     event.target.value = valor;
     this.novoFornecedor.telefone = valor;
+  }
+
+  atualizarListaEstoqueBaixo() {
+    this.listaEstoqueBaixo = this.listaMateriais.filter(item => {
+      if (item.estoqueMinimo === null || item.estoqueMinimo === undefined || item.estoqueMinimo === '') {
+        return false;
+      }
+      // Alterado de <= para <
+      return Number(item.quantidadeEstoque) < Number(item.estoqueMinimo);
+    });
+  }
+
+  get materiaisComEstoqueBaixo(): any[] {
+    return this.listaMateriais.filter(item => {
+      if (item.estoqueMinimo === null || item.estoqueMinimo === undefined || item.estoqueMinimo === '') {
+        return false;
+      }
+      
+      const qtd = Number(item.quantidadeEstoque);
+      const min = Number(item.estoqueMinimo);
+      
+      // Alterado de <= para <
+      return qtd < min;
+    });
+  }
+
+  // Substitua os getters antigos por estes mais simples
+  get qtdEstoqueBaixo(): number {
+    return this.listaEstoqueBaixo.length;
+  }
+
+  get qtdEstoqueNormal(): number {
+    return this.listaMateriais.length - this.listaEstoqueBaixo.length;
   }
 }

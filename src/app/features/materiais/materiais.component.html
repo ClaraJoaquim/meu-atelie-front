@@ -46,21 +46,19 @@
       </div>
     </section>
 
-    <section class="alerts-section" aria-label="Alertas de estoque">
+    <section class="alerts-section" aria-label="Alertas de estoque" *ngIf="listaEstoqueBaixo.length > 0">
       <h3 class="section-title">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
         Estoque Baixo - Reposição Necessária
       </h3>
       <div class="alerts-list">
-        <ng-container *ngFor="let item of listaMateriais">
-          <div class="alert-item alert-item--danger" *ngIf="item.estoqueMinimo != null && item.quantidadeEstoque <= item.estoqueMinimo">
-            <div class="alert-dot alert-dot--danger"></div>
-            <div class="alert-content">
-              <strong class="alert-title">{{ item.nome }} <span *ngIf="item.codigoReferencia">(#{{ item.codigoReferencia }})</span></strong>
-              <p class="alert-text">Restam apenas {{ item.quantidadeEstoque }} {{ item.unidadeMedida }}. Mínimo recomendado: {{ item.estoqueMinimo }}.</p>
-            </div>
+        <div class="alert-item alert-item--danger" *ngFor="let item of listaEstoqueBaixo">
+          <div class="alert-dot alert-dot--danger"></div>
+          <div class="alert-content">
+            <strong class="alert-title">{{ item.nome }} <span *ngIf="item.codigoReferencia">(#{{ item.codigoReferencia }})</span></strong>
+            <p class="alert-text">Restam apenas {{ item.quantidadeEstoque }} {{ item.unidadeMedida }}. Mínimo recomendado: {{ item.estoqueMinimo }}.</p>
           </div>
-        </ng-container>
+        </div>
       </div>
     </section>
 
@@ -91,15 +89,15 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of listaMateriais">
-              <td data-label="Material">{{ item.nome }} <small *ngIf="item.codigoReferencia" style="color: var(--secondary)"><br>Ref: {{ item.codigoReferencia }}</small></td>
+              <td data-label="Material">{{ item.nome }}</td>
               <td data-label="Categoria">{{ item.categoria }}</td>
               <td data-label="Quantidade">{{ item.quantidadeEstoque }}</td>
               <td data-label="Unidade">{{ item.unidadeMedida }}</td>
               <td data-label="Fornecedor">{{ item.fornecedor || '-' }}</td>
               <td data-label="Status">
-                <span class="status-badge" [ngClass]="(item.estoqueMinimo != null && item.quantidadeEstoque <= item.estoqueMinimo) ? 'status--late' : 'status--done'">
-                  {{ (item.estoqueMinimo != null && item.quantidadeEstoque <= item.estoqueMinimo) ? 'Crítico' : 'Normal' }}
-                </span>
+                <span class="status-badge" [ngClass]="(item.estoqueMinimo != null && item.quantidadeEstoque < item.estoqueMinimo) ? 'status--late' : 'status--done'">
+  {{ (item.estoqueMinimo != null && item.quantidadeEstoque < item.estoqueMinimo) ? 'Crítico' : 'Normal' }}
+</span>
               </td>
               <td style="text-align: center;">
                 <div style="display: flex; gap: 10px; justify-content: center;">
