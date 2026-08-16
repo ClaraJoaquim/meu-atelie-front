@@ -1,28 +1,23 @@
 <app-header></app-header>
 
-  <main class="main">
+  <main class="main" *ngIf="dashboard">
     <div class="container">
 
       <section class="welcome-section">
-        <div class="welcome-text">
-          <h2 class="welcome-title">Bom dia, Maria!</h2>
-          <p class="welcome-subtitle">Aqui esta o resumo das suas encomendas de hoje.</p>
-        </div>
-        <a routerLink="/encomenda" class="btn-nova-encomenda">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Nova Encomenda
-        </a>
-      </section>
+  <div class="welcome-text">
+    <h2 class="welcome-title">{{ saudacao }}, {{ dashboard.nomeUsuario }}!</h2>
+    <p class="welcome-subtitle">Aqui está o resumo das suas encomendas de hoje.</p>
+  </div>
+</section>
 
       <section class="summary-section" aria-label="Resumo dos pedidos">
         <div class="summary-cards">
-
           <article class="summary-card summary-card--progress">
             <div class="card-icon-wrapper card-icon--progress">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div class="card-content">
-              <span class="card-number">8</span>
+              <span class="card-number">{{ dashboard.resumo.emAndamento }}</span>
               <span class="card-label">Em andamento</span>
             </div>
           </article>
@@ -32,7 +27,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div class="card-content">
-              <span class="card-number">23</span>
+              <span class="card-number">{{ dashboard.resumo.finalizados }}</span>
               <span class="card-label">Finalizados</span>
             </div>
           </article>
@@ -42,39 +37,24 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
             </div>
             <div class="card-content">
-              <span class="card-number">2</span>
+              <span class="card-number">{{ dashboard.resumo.atrasados }}</span>
               <span class="card-label">Atrasados</span>
             </div>
           </article>
-
         </div>
       </section>
 
-      <section class="alerts-section" aria-label="Alertas e avisos">
+      <section class="alerts-section" aria-label="Alertas e avisos" *ngIf="dashboard.alertas?.length > 0">
         <h3 class="section-title">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           Alertas
         </h3>
         <div class="alerts-list">
-          <div class="alert-item alert-item--warning">
-            <div class="alert-dot alert-dot--warning"></div>
+          <div class="alert-item" [ngClass]="'alert-item--' + alerta.tipo" *ngFor="let alerta of dashboard.alertas">
+            <div class="alert-dot" [ngClass]="'alert-dot--' + alerta.tipo"></div>
             <div class="alert-content">
-              <strong class="alert-title">Prazo proximo</strong>
-              <p class="alert-text">Encomenda #045 de Ana Silva vence em 2 dias.</p>
-            </div>
-          </div>
-          <div class="alert-item alert-item--danger">
-            <div class="alert-dot alert-dot--danger"></div>
-            <div class="alert-content">
-              <strong class="alert-title">Encomenda atrasada</strong>
-              <p class="alert-text">Encomenda #038 de Carlos Souza esta 3 dias atrasada.</p>
-            </div>
-          </div>
-          <div class="alert-item alert-item--info">
-            <div class="alert-dot alert-dot--info"></div>
-            <div class="alert-content">
-              <strong class="alert-title">Nova mensagem</strong>
-              <p class="alert-text">Cliente Lucia Mendes enviou uma mensagem sobre o pedido #052.</p>
+              <strong class="alert-title">{{ alerta.titulo }}</strong>
+              <p class="alert-text">{{ alerta.mensagem }}</p>
             </div>
           </div>
         </div>
@@ -97,40 +77,19 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-label="Pedido">#052</td>
-                <td data-label="Cliente">Lucia Mendes</td>
-                <td data-label="Tipo">Toalha de mesa bordada</td>
-                <td data-label="Prazo">25/02/2026</td>
-                <td data-label="Status"><span class="status-badge status--progress">Em andamento</span></td>
+              <tr *ngFor="let pedido of dashboard.pedidosRecentes">
+                <td data-label="Pedido">#{{ pedido.idVisual?.toString().padStart(3, '0') }}</td>
+                <td data-label="Cliente">{{ pedido.nomeCliente }}</td>
+                <td data-label="Tipo">{{ pedido.tipoPrincipal }}</td>
+                <td data-label="Prazo">{{ pedido.dataEntrega | date:'dd/MM/yyyy' }}</td>
+                <td data-label="Status">
+                  <span class="status-badge" [ngClass]="getClasseStatus(pedido.status)">
+                    {{ getLabelStatus(pedido.status) }}
+                  </span>
+                </td>
               </tr>
-              <tr>
-                <td data-label="Pedido">#051</td>
-                <td data-label="Cliente">Roberto Alves</td>
-                <td data-label="Tipo">Jogo de cama personalizado</td>
-                <td data-label="Prazo">22/02/2026</td>
-                <td data-label="Status"><span class="status-badge status--progress">Em andamento</span></td>
-              </tr>
-              <tr>
-                <td data-label="Pedido">#050</td>
-                <td data-label="Cliente">Fernanda Lima</td>
-                <td data-label="Tipo">Pano de prato (kit 5)</td>
-                <td data-label="Prazo">20/02/2026</td>
-                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
-              </tr>
-              <tr>
-                <td data-label="Pedido">#049</td>
-                <td data-label="Cliente">Joao Pereira</td>
-                <td data-label="Tipo">Camiseta bordada</td>
-                <td data-label="Prazo">18/02/2026</td>
-                <td data-label="Status"><span class="status-badge status--done">Finalizado</span></td>
-              </tr>
-              <tr>
-                <td data-label="Pedido">#048</td>
-                <td data-label="Cliente">Maria Clara</td>
-                <td data-label="Tipo">Almofada decorativa</td>
-                <td data-label="Prazo">15/02/2026</td>
-                <td data-label="Status"><span class="status-badge status--late">Atrasado</span></td>
+              <tr *ngIf="dashboard.pedidosRecentes?.length === 0">
+                <td colspan="5" style="text-align: center; color: var(--text-muted);">Nenhum pedido recente.</td>
               </tr>
             </tbody>
           </table>
@@ -141,4 +100,3 @@
   </main>
 
 <app-footer></app-footer>
-
