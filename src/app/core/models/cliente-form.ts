@@ -2,6 +2,7 @@ export interface ClienteForm {
   nome: string;
   email: string;
   telefone: string;
+  cpf?: string,
   cnpj?: string;
   dataNascimento?: string;
   observacoes?: string;

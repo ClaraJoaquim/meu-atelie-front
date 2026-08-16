@@ -107,6 +107,62 @@
   cursor: not-allowed;
 }
 
+.btn-edit {
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background-color: var(--accent);
+  color: var(--primary);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  color: #5c3a21;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-chip:hover {
+  border-color: #5c3a21;
+}
+
+.filter-chip.active {
+  background-color: #5c3a21;
+  color: #ffffff;
+  border-color: #5c3a21;
+}
+
+.chip-badge {
+  background-color: #fcecdb;
+  color: #5c3a21;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.filter-chip.active .chip-badge {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
 
 /* ============================================
    RESPONSIVIDADE

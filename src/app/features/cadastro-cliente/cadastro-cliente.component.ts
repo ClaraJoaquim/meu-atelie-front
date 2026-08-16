@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { FooterComponent } from '../../shared/components/footer/footer.component';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ClienteForm } from '../../core/models/cliente-form';
@@ -21,12 +21,14 @@ export class CadastroClienteComponent {
   clienteForm!: FormGroup;
   @ViewChild(ModalComponent) modal!: ModalComponent;
   canais: CanalAquisicao[] = [];
-
+  isEditMode: boolean = false;
+  clienteId: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private clienteService: ClienteService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -49,6 +51,15 @@ export class CadastroClienteComponent {
       cidade: [''],
       estado: [''],
       cep: ['']
+    });
+
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      if (id) {
+        this.isEditMode = true;
+        this.clienteId = Number(id);
+        this.carregarDadosCliente(this.clienteId);
+      }
     });
   }
 
@@ -100,26 +111,21 @@ export class CadastroClienteComponent {
   cadastrar() {
     if (this.clienteForm.invalid) {
         this.clienteForm.markAllAsTouched();
-        this.modal.abrirModal(
-          'Dados Obrigatórios',
-          'Nome e Telefone são obrigatórios. Por favor, verifique os dados e tente novamente.',
-          'erro',
-          'Fechar'
-        );
+        this.modal.abrirModal('Dados Obrigatórios', 'Nome e Telefone são obrigatórios.', 'erro', 'Fechar');
         return; 
     }
 
     const formValue = this.clienteForm.value;
     
-    const novoCliente: ClienteForm = {
+    const payload: ClienteForm = {
       nome: formValue.nome,
       email: formValue.email || null,
       telefone: formValue.telefone.replace(/\D/g, ''),
+      cpf: formValue.cpf || null,
       cnpj: formValue.cnpj || null,
       dataNascimento: formValue.dataNascimento || null,
       observacoes: formValue.observacoes || null,
       canalId: (formValue.canalId !== null && formValue.canalId !== "") ? formValue.canalId : null,
-
       endereco: {
         rua: formValue.endereco || null,
         numero: formValue.numero || null,
@@ -130,20 +136,56 @@ export class CadastroClienteComponent {
       }
     };
 
-this.clienteService.cadastrarCliente(novoCliente).subscribe({
-    next: (res) => {
-      this.modal.abrirModal('Sucesso!', 'Cliente cadastrado com sucesso.', 'sucesso', 'Continuar');
-      this.modal.acaoConfirmada.subscribe(() => this.router.navigate(['/clientes']));
-    },
-    error: (err) => {
-      this.modal.abrirModal('Erro', 'Ocorreu um erro ao salvar no servidor. Tente novamente.', 'erro', 'Fechar');
+    if (this.isEditMode && this.clienteId) {
+      this.clienteService.atualizarCliente(this.clienteId, payload).subscribe({
+        next: () => {
+          this.modal.abrirModal('Sucesso!', 'Cliente atualizado com sucesso.', 'sucesso', 'Continuar');
+          this.modal.acaoConfirmada.subscribe(() => this.router.navigate(['/clientes']));
+        },
+        error: () => this.modal.abrirModal('Erro', 'Ocorreu um erro ao atualizar. Tente novamente.', 'erro', 'Fechar')
+      });
+    } else {
+      this.clienteService.cadastrarCliente(payload).subscribe({
+        next: () => {
+          this.modal.abrirModal('Sucesso!', 'Cliente cadastrado com sucesso.', 'sucesso', 'Continuar');
+          this.modal.acaoConfirmada.subscribe(() => this.router.navigate(['/clientes']));
+        },
+        error: () => this.modal.abrirModal('Erro', 'Ocorreu um erro ao salvar. Tente novamente.', 'erro', 'Fechar')
+      });
     }
-  });
+  }
+
+  carregarDadosCliente(id: number) {
+    this.clienteService.buscarClientePorId(id).subscribe({
+      next: (cliente) => {
+        this.clienteForm.patchValue({
+          nome: cliente.nome,
+          cpf: cliente.cpf,
+          cnpj: cliente.cnpj,
+          dataNascimento: cliente.dataNascimento,
+          telefone: cliente.telefone,
+          email: cliente.email,
+          observacoes: cliente.observacoes,
+          canalId: cliente.canalAquisicao?.id || null, // Adapte conforme o retorno do seu DTO
+          endereco: cliente.endereco?.rua || '',
+          numero: cliente.endereco?.numero || '',
+          bairro: cliente.endereco?.bairro || '',
+          cidade: cliente.endereco?.cidade || '',
+          estado: cliente.endereco?.estado || '',
+          cep: cliente.endereco?.cep || ''
+        });
+      },
+      error: () => {
+        this.modal.abrirModal('Erro', 'Falha ao carregar dados do cliente.', 'erro', 'Voltar');
+        this.modal.acaoConfirmada.subscribe(() => this.router.navigate(['/clientes']));
+      }
+    });
   }
 
   get nome() { return this.clienteForm.get('nome'); }
   get email() { return this.clienteForm.get('email'); }
   get telefone() { return this.clienteForm.get('telefone'); }
+  get cpf() { return this.clienteForm.get('cpf'); }
   get cnpj() { return this.clienteForm.get('cnpj'); }
   get dataNascimento() { return this.clienteForm.get('dataNascimento'); }
   get observacoes() { return this.clienteForm.get('observacoes'); }

@@ -38,4 +38,33 @@ export class ClienteService {
   listarCanais(): Observable<CanalAquisicao[]> {
     return this.http.get<CanalAquisicao[]>(`${this.apiUrl}/canal-aquisicao`);
   }
+
+  buscarClientePorId(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get<any>(`${this.apiUrl}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+
+  atualizarCliente(id: number, cliente: ClienteForm): Observable<ClienteForm> {
+    const token = localStorage.getItem('token');
+    return this.http.put<ClienteForm>(`${this.apiUrl}/editar/${id}`, cliente, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  }
+
+  desativarCliente(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.delete(`${this.apiUrl}/desativar/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+  }
+
+  reativarCliente(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.patch(`${this.apiUrl}/${id}/reativar`, {}, { headers: { Authorization: `Bearer ${token}` } });
+  }
+
+  listarClientesInativos(): Observable<ClienteResumo[]> {
+    const token = localStorage.getItem('token');
+    return this.http.get<ClienteResumo[]>(`${this.apiUrl}/inativos`, { headers: { Authorization: `Bearer ${token}` } });
+  }
 }

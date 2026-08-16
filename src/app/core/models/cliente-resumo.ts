@@ -6,4 +6,5 @@ export interface ClienteResumo {
   totalPedidos: number;
   totalGasto: number;
   dataCadastro: string;
+  ativo: boolean;
 }
