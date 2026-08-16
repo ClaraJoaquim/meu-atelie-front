@@ -145,6 +145,22 @@
   background-color: var(--accent);
 }
 
+.desconto-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.desconto-container .form-input {
+  flex: 1;
+}
+
+.desconto-real {
+  white-space: nowrap;
+  font-weight: 600;
+  color: #2563eb;
+}
+
 
 /* ============================================
    RESPONSIVIDADE

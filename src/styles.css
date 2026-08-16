@@ -18,6 +18,8 @@
   --color-success-bg: #e8f5e9;
   --color-warning: #e65100;
   --color-warning-bg: #fff3e0;
+  --color-orcamento-bg2: #e6e0ff;
+  --color-orcamento: #8428c6;
   --color-danger: #c62828;
   --color-danger-bg: #ffebee;
   --color-info: #1565c0;
@@ -587,6 +589,11 @@ button[disabled] {
   color: var(--color-danger);
 }
 
+.status--orcamento {
+  background-color: var(--color-orcamento-bg2);
+  color: var(--color-orcamento);
+}
+
 /* ============================================
    CABECALHOS DE PAGINA & BOTOES
    ============================================ */
@@ -756,6 +763,11 @@ button[disabled] {
 .filter-count--late {
   background-color: var(--color-danger-bg);
   color: var(--color-danger);
+}
+
+.filter-count--orcamento {
+  background-color: var(--color-orcamento-bg2);
+  color: var(--color-orcamento);
 }
 
 .pagination {

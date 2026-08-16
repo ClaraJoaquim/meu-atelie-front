@@ -1,0 +1,155 @@
+<app-header></app-header>
+
+<main class="main">
+  <div class="container">
+
+    <section class="page-header">
+      <div class="page-header-text">
+        <a routerLink="/pedidos" class="back-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" width="20" height="20">
+            <line x1="19" y1="12" x2="5" y2="12" />
+            <polyline points="12 19 5 12 12 5" />
+          </svg>
+          Voltar para Pedidos
+        </a>
+        <h2 class="page-title">{{ isEdicao ? 'Editar Encomenda' : 'Nova Encomenda' }}</h2>
+        <p class="page-subtitle">
+          {{ isEdicao ? 'Atualize os dados da encomenda abaixo.' : 'Preencha os dados abaixo para registrar uma nova
+          encomenda.' }}
+        </p>
+      </div>
+    </section>
+
+    <form class="form-card" (ngSubmit)="salvar()" #encomendaForm="ngForm">
+
+      <fieldset class="form-section">
+        <legend class="form-legend">Dados do Cliente</legend>
+        <div class="form-grid">
+          <div class="form-group form-group--full">
+            <label for="cliente" class="form-label">Cliente *</label>
+            <select id="cliente" name="cliente" class="form-select" [(ngModel)]="clienteSelecionado" required>
+              <option [ngValue]="null" disabled selected>Selecione um cliente</option>
+              <option *ngFor="let c of clientes" [value]="c.id">{{ c.nome }}</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="form-legend">Produtos</legend>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
+
+          <div *ngFor="let p of produtos"
+            style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px; text-align: center;">
+            <img [src]="p.imagem ? 'http://localhost:8080/uploads/' + p.imagem : 'assets/placeholder.jpg'" alt="Produto"
+              style="width: 100%; height: 120px; object-fit: contain; border-radius: 4px; background-color: #f9f9f9;">
+            <h4 style="margin: 10px 0 5px;">{{ p.nome }}</h4>
+            <p style="font-size: 0.85rem; color: #666; margin-bottom: 10px;">{{ p.descricao }}</p>
+            <p style="margin-bottom: 15px;"><strong>R$ {{ p.preco }}</strong></p>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <button type="button" (click)="alterarQuantidade(p, -1)" [disabled]="p.quantidadeSelecionada === 0"
+                style="padding: 5px 10px; cursor: pointer;">-</button>
+              <span>{{ p.quantidadeSelecionada }}</span>
+              <button type="button" (click)="alterarQuantidade(p, 1)"
+                style="padding: 5px 10px; cursor: pointer;">+</button>
+            </div>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <fieldset class="form-section">
+        <legend class="form-legend">Prazos e Valor</legend>
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="data-pedido" class="form-label">Data do Pedido *</label>
+            <input type="date" id="data-pedido" name="data-pedido" class="form-input" [(ngModel)]="dataPedido" required>
+          </div>
+
+          <div class="form-group">
+            <label for="prazo-entrega" class="form-label">Prazo de Entrega *</label>
+            <input type="date" id="prazo-entrega" name="prazo-entrega" class="form-input" [(ngModel)]="prazoEntrega"
+              [min]="dataPedido">
+
+            <div *ngIf="prazoEntrega && dataPedido && prazoEntrega < dataPedido"
+              style="color: #d32f2f; font-size: 0.85rem; margin-top: 5px; font-weight: bold;">
+              Erro: A data de entrega não pode ser menor que a data do pedido.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subtotal" class="form-label">Subtotal</label>
+            <input type="text" id="subtotal" class="form-input" [value]="subtotal | currency:'BRL'" readonly
+              style="background-color: #f9f9f9; pointer-events: none; cursor: default;">
+          </div>
+
+          <div class="form-group">
+            <label for="tipoDesconto" class="form-label">Tipo de Desconto</label>
+            <select id="tipoDesconto" name="tipoDesconto" class="form-select" [(ngModel)]="tipoDesconto"
+              (ngModelChange)="mudouTipoDesconto()">
+              <option value="VALOR">Valor (R$)</option>
+              <option value="PORCENTAGEM">Porcentagem (%)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="desconto" class="form-label">
+              Desconto {{ tipoDesconto === 'PORCENTAGEM' ? '(%)' : '(R$)' }}
+            </label>
+
+            <div class="desconto-container">
+              <input type="text" class="form-input" [value]="descontoExibicao" (input)="aplicarMascara($event)">
+
+              <span class="desconto-real" *ngIf="tipoDesconto === 'PORCENTAGEM'">
+                = {{ valorDesconto | currency:'BRL' }}
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="valor" class="form-label">Valor Final *</label>
+            <input type="text" id="valor" class="form-input" [value]="valorTotal | currency:'BRL'" readonly
+              style="background-color: #e6f7ff; font-weight: bold; pointer-events: none; cursor: default;">
+          </div>
+
+          <div class="form-group">
+            <label for="forma-pagamento" class="form-label">Forma de Pagamento</label>
+            <select id="forma-pagamento" name="forma-pagamento" class="form-select" [(ngModel)]="formaPagamento">
+              <option value="" disabled selected>Selecione</option>
+              <option value="DINHEIRO">Dinheiro</option>
+              <option value="PIX">PIX</option>
+              <option value="CARTAO_CREDITO">Cartão de crédito</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="status" class="form-label">Status</label>
+            <select id="status" name="status" class="form-select" [(ngModel)]="statusSelecionado" required>
+              <option *ngFor="let s of statusList" [value]="s.nome">{{ s.descricao }}</option>
+            </select>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <div *ngIf="!encomendaForm.valid || subtotal === 0 || (prazoEntrega && dataPedido && prazoEntrega < dataPedido)"
+        style="color: #d32f2f; background-color: #fde0e0; padding: 10px; border-radius: 4px; margin-bottom: 15px; text-align: center; font-size: 0.9rem;">
+        <strong>Atenção:</strong> Preencha os campos obrigatórios, adicione produtos e verifique se as datas estão
+        corretas.
+      </div>
+
+      <div class="form-actions">
+        <a routerLink="/pedidos" class="btn-secondary">Cancelar</a>
+        <button type="submit" class="btn-nova-encomenda"
+          [disabled]="!encomendaForm.valid || subtotal === 0 || (prazoEntrega && dataPedido && prazoEntrega < dataPedido)">
+          {{ isEdicao ? 'Atualizar Encomenda' : 'Salvar Encomenda' }}
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</main>
+
+<app-footer></app-footer>
