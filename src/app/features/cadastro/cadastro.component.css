@@ -98,6 +98,22 @@
   background-color: #a71d2a;
 }
 
+.btn-upload {
+  background-color: #795548;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.btn-upload:hover {
+  background-color: #5d4037;
+  opacity: 0.9;
+}
+
 textarea.input-global {
   width: 100%;
   min-height: 100px;
